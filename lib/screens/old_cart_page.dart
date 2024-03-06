@@ -1,6 +1,6 @@
 import 'package:catalog/data/products.dart';
 import 'package:catalog/models/product_model.dart';
-import 'package:catalog/widgets/product_card_widget.dart';
+import 'package:catalog/widgets/cart_product_card_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:gluestack_ui/gluestack_ui.dart';
 
@@ -10,7 +10,10 @@ class CartLandingPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // const double hPadding = 400;
-    final double coreCardWidth = MediaQuery.of(context).size.width / 1.5;
+    final double coreCardWidth = MediaQuery.of(context).size.width > 500
+        ? MediaQuery.of(context).size.width / 1.5
+        : MediaQuery.of(context).size.width;
+    print(MediaQuery.of(context).size.width);
     const double hSpace = 10;
 
     return Scaffold(
@@ -40,7 +43,19 @@ class CartLandingPage extends StatelessWidget {
               GSBox(
                 style: GSStyle(
                   padding:
-                      const EdgeInsets.symmetric(vertical: 20, horizontal: 80),
+                      const EdgeInsets.symmetric(vertical: 20, horizontal: 60),
+                  sm: GSStyle(
+                    padding: const EdgeInsets.symmetric(
+                        vertical: 10, horizontal: 15),
+                  ),
+                  md: GSStyle(
+                    padding: const EdgeInsets.symmetric(
+                        vertical: 20, horizontal: 70),
+                  ),
+                  lg: GSStyle(
+                    padding: const EdgeInsets.symmetric(
+                        vertical: 20, horizontal: 80),
+                  ),
                   bg: $GSColors.white,
                   borderRadius: 6,
                   width: coreCardWidth,
@@ -52,24 +67,16 @@ class CartLandingPage extends StatelessWidget {
                         children: [
                           CartProductCard(
                             productModel: ProductModel.fromJson(
-                              products[i],
+                              productsData[i],
                             ),
                           ),
-                          i != 2
-                              ? GSBox(
-                                  style: GSStyle(
-                                    padding: const EdgeInsets.symmetric(
-                                        horizontal: 10),
-                                  ),
-                                  child: const GSDivider(),
-                                )
-                              : const SizedBox.shrink(),
+                          i != 2 ? const GSDivider() : const SizedBox.shrink(),
                         ],
                       ),
-                    GSHStack(
+                    const GSHStack(
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
-                        const GSText(
+                        GSText(
                           text: 'Order Details (3 items)',
                         ),
                       ],
@@ -143,7 +150,19 @@ class CartLandingPage extends StatelessWidget {
                 style: GSStyle(
                   width: coreCardWidth,
                   padding:
-                      const EdgeInsets.symmetric(vertical: 20, horizontal: 80),
+                      const EdgeInsets.symmetric(vertical: 20, horizontal: 60),
+                  sm: GSStyle(
+                    padding: const EdgeInsets.symmetric(
+                        vertical: 10, horizontal: 15),
+                  ),
+                  md: GSStyle(
+                    padding: const EdgeInsets.symmetric(
+                        vertical: 20, horizontal: 70),
+                  ),
+                  lg: GSStyle(
+                    padding: const EdgeInsets.symmetric(
+                        vertical: 20, horizontal: 80),
+                  ),
                   bg: $GSColors.white,
                   borderRadius: 6,
                 ),
@@ -157,7 +176,7 @@ class CartLandingPage extends StatelessWidget {
                     GSHStack(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        GSText(text: 'Delivery Address'),
+                        const GSText(text: 'Delivery Address'),
                         GSText(
                           text: 'Change',
                           size: GSSizes.$sm,
@@ -181,32 +200,32 @@ class CartLandingPage extends StatelessWidget {
                             color: $GSColors.textLight700,
                           )),
                         ),
-                        GSText(
+                        const GSText(
                           text: '606-249664 Copper Field,',
                           size: GSSizes.$sm,
                         ),
-                        GSText(
+                        const GSText(
                           text: 'Street Roseville, NH 349101',
                           size: GSSizes.$sm,
                         ),
                       ],
                     ),
                     //3rd Row-------
-                    GSBox(
-                      style: GSStyle(
-                        width: double.infinity,
-                      ),
-                      child: GSButton(
-                          size: GSButtonSizes.$md,
-                          child: GSButtonText(
-                            text: 'PLACE ORDER',
-                            style: GSStyle(
-                                textStyle:
-                                    TextStyle(fontWeight: FontWeight.w300)),
-                          ),
-                          onPressed: () {
-                            print('Placing Order!');
-                          }),
+                    GSVStack(
+                      //Even box does not work.
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      children: [
+                        GSButton(
+                            child: GSButtonText(
+                              text: 'PLACE ORDER',
+                              style: GSStyle(
+                                  textStyle: const TextStyle(
+                                      fontWeight: FontWeight.w300)),
+                            ),
+                            onPressed: () {
+                              print('Placing Order!');
+                            }),
+                      ],
                     )
                   ],
                 ),

@@ -1,3 +1,3 @@
-# catalog
+# catalog (using Gluestack-ui for flutter)
 
-A new Flutter project.
+A simple shopping app made using Gluestack-ui for flutter!.

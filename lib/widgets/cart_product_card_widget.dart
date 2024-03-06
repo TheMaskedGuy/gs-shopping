@@ -1,30 +1,38 @@
 import 'package:catalog/models/product_model.dart';
+import 'package:catalog/utils/state.dart';
 import 'package:flutter/material.dart';
 import 'package:gluestack_ui/gluestack_ui.dart';
+import 'package:intl/intl.dart';
 
 class CartProductCard extends StatelessWidget {
   final ProductModel productModel;
   final VoidCallback? deleteCallback;
   final VoidCallback? addQty;
   final VoidCallback? subQty;
-  final int? qty;
   const CartProductCard({
     super.key,
     required this.productModel,
     this.deleteCallback,
     this.addQty,
     this.subQty,
-    this.qty = 0,
   });
 
   @override
   Widget build(BuildContext context) {
+    final formatCurrency = NumberFormat.simpleCurrency(locale: 'HI');
+
     return GSBox(
       style: GSStyle(
-          padding: const EdgeInsets.symmetric(
-        vertical: 10,
-        // horizontal: 10,
-      )),
+        bg: $GSColors.backgroundDark100,
+        borderRadius: 4,
+        margin: const EdgeInsets.symmetric(
+          vertical: 10,
+        ),
+        padding: const EdgeInsets.symmetric(
+          vertical: 10,
+          horizontal: 10,
+        ),
+      ),
       child: GSHStack(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
@@ -34,8 +42,8 @@ class CartProductCard extends StatelessWidget {
             children: [
               GSImage(
                   borderRadius: GSImageRadius.$sm,
-                  style: GSStyle(width: 80, height: 100),
-                  fit: BoxFit.fill,
+                  style: GSStyle(width: 80, height: 80),
+                  fit: BoxFit.cover,
                   path: productModel.imageUrl ??
                       'https://placehold.co/250x250?text=Error',
                   imageType: GSImageType.network),
@@ -57,33 +65,18 @@ class CartProductCard extends StatelessWidget {
                       ),
                     ),
                   ),
-                  GSText(
-                    text:
-                        'Delivery by Mon ${productModel.deliveryDate?.toLocal().day ?? 'N/A'}',
-                    style: GSStyle(
-                      textStyle: TextStyle(
-                        fontWeight: FontWeight.w300,
-                        fontSize: 13,
-                        color: $GSColors.textLight500,
-                      ),
-                    ),
-                  ),
                   GSHStack(
                     children: [
                       GSText(
-                        text: 'Rs. ${productModel.price}',
-                        style: GSStyle(
-                          textStyle: const TextStyle(
-                            fontSize: 14,
-                          ),
-                        ),
+                        size: GSSizes.$xs,
+                        bold: true,
+                        text: '${formatCurrency.format(productModel.price)}',
                       ),
                       GSText(
-                        text: '  ${productModel.discount} off',
+                        text: ' (${productModel.discount} OFF)',
+                        size: GSSizes.$xs,
                         style: GSStyle(
                           textStyle: TextStyle(
-                            fontSize: 11,
-                            fontWeight: FontWeight.w800,
                             color: $GSColors.green600,
                           ),
                         ),
@@ -95,39 +88,41 @@ class CartProductCard extends StatelessWidget {
             ],
           ),
           // Delete and qty counter----------------------
-          GSVStack(
-            space: GSVstackSpaces.$4xl,
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            crossAxisAlignment: CrossAxisAlignment.end,
+          GSHStack(
+            space: GSHstackSpaces.$md,
             children: [
-              //--- DELETE ----
               GsGestureDetector(
-                onPressed: deleteCallback,
-                child: const GSIcon(icon: Icons.delete_outline_outlined),
+                onPressed: () {
+                  cartStateNotifier.removeFromCart(productModel);
+                },
+                child: GSBox(
+                  style: GSStyle(
+                    height: 24,
+                    width: 24,
+                    borderRadius: 2,
+                    bg: $GSColors.primary0.withOpacity(0.7),
+                  ),
+                  child: const GSIcon(
+                    icon: Icons.remove,
+                  ),
+                ),
               ),
-              //--- QTY COUNTER ----
-              GSHStack(
-                space: GSHstackSpaces.$md,
-                children: [
-                  GSIconButton(
-                    size: GSIconButtonSizes.$xs,
-                    onPressed: subQty ?? () {},
-                    style: GSStyle(bg: $GSColors.primary0),
-                    icon: const GSIcon(
-                      icon: Icons.remove,
-                    ),
+              GSText(text: '${productModel.quantity}'),
+              GsGestureDetector(
+                onPressed: () {
+                  cartStateNotifier.addToCart(productModel);
+                },
+                child: GSBox(
+                  style: GSStyle(
+                    height: 24,
+                    width: 24,
+                    borderRadius: 2,
+                    bg: $GSColors.primary0.withOpacity(0.7),
                   ),
-                  GSText(text: '$qty'),
-                  GSIconButton(
-                    size: GSIconButtonSizes.$xs,
-                    onPressed: addQty ?? () {},
-                    style: GSStyle(bg: $GSColors.primary0),
-                    icon: const GSIcon(
-                      icon: Icons.add,
-                      // style: GSStyle(color: $GSColors.white),
-                    ),
+                  child: const GSIcon(
+                    icon: Icons.add,
                   ),
-                ],
+                ),
               ),
             ],
           ),

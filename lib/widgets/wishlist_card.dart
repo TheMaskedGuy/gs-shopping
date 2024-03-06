@@ -2,6 +2,7 @@ import 'package:catalog/models/product_model.dart';
 import 'package:catalog/utils/state.dart';
 import 'package:flutter/material.dart';
 import 'package:gluestack_ui/gluestack_ui.dart';
+import 'package:intl/intl.dart';
 
 class WishListCard extends StatelessWidget {
   final ProductModel productModel;
@@ -11,6 +12,8 @@ class WishListCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final formatCurrency = NumberFormat.simpleCurrency(locale: 'HI');
+
     return GSBox(
       style: GSStyle(
         margin: const EdgeInsets.all(4),
@@ -68,14 +71,14 @@ class WishListCard extends StatelessWidget {
           GSHStack(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              GSText(text: '₹${productModel.price}'),
+              GSText(text: '${formatCurrency.format(productModel.price)}'),
               //TODO: Get icon button fix (GS) and resolve with that in future
               MouseRegion(
                 cursor: SystemMouseCursors.click,
                 child: GsGestureDetector(
                   onPressed: removeFunction,
                   child: GSIcon(
-                    icon: Icons.favorite_border,
+                    icon: Icons.favorite,
                     style: GSStyle(color: $GSColors.primary400),
                   ),
                 ),
@@ -83,6 +86,20 @@ class WishListCard extends StatelessWidget {
             ],
           ),
           // ---- 3rd main child ---------
+          GSCenter(
+            child: GSBox(
+              style: GSStyle(
+                padding: const EdgeInsets.only(top: 6),
+                // width: double.infinity, //TODO: FIx this after button bug fix
+              ),
+              child: GSButton(
+                  variant: GSButtonVariants.outline,
+                  child: const GSButtonText(text: '+ Add to cart'),
+                  onPressed: () {
+                    cartStateNotifier.addToCart(productModel);
+                  }),
+            ),
+          )
         ],
       ),
     );

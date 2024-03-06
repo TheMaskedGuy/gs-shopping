@@ -1,5 +1,6 @@
 import 'package:catalog/data/products.dart';
 import 'package:catalog/models/product_model.dart';
+import 'package:catalog/screens/cart_page.dart';
 import 'package:catalog/screens/old_cart_page.dart';
 import 'package:catalog/screens/wishlist_page.dart';
 import 'package:catalog/widgets/product_card.dart';
@@ -11,8 +12,21 @@ class ProductsLandingPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final sw = MediaQuery.of(context).size.width;
-    print(sw);
+    Widget navButton({required IconData icon, required Widget landingPage}) {
+      return MouseRegion(
+        cursor: SystemMouseCursors.click,
+        child: GsGestureDetector(
+          child: GSIcon(icon: icon),
+          onPressed: () {
+            Navigator.of(context)
+                .push(MaterialPageRoute(builder: (context) => landingPage));
+          },
+        ),
+      );
+    }
+
+    // final sw = MediaQuery.of(context).size.width;
+    // print(sw);
     List<ProductModel> products = List.generate(productsData.length,
         (index) => ProductModel.fromJson(productsData[index]));
     return Scaffold(
@@ -25,17 +39,17 @@ class ProductsLandingPage extends StatelessWidget {
           bg: $GSColors.white,
           borderRadius: 23,
         ),
-        child: const GSHStack(
+        child: GSHStack(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            NavButton(icon: Icons.person, landingPage: CartLandingPage()),
-            NavButton(
+            navButton(icon: Icons.person, landingPage: const CartPage()),
+            navButton(
               icon: Icons.favorite,
-              landingPage: WishListPage(),
+              landingPage: const WishListPage(),
             ),
-            NavButton(
+            navButton(
               icon: Icons.shopping_cart,
-              landingPage: CartLandingPage(),
+              landingPage: const CartPage(),
             ),
           ],
         ),
@@ -51,26 +65,6 @@ class ProductsLandingPage extends StatelessWidget {
           return ProductCard(
             productModel: products[index],
           );
-        },
-      ),
-    );
-  }
-}
-
-class NavButton extends StatelessWidget {
-  final IconData icon;
-  final Widget landingPage;
-  const NavButton({super.key, required this.icon, required this.landingPage});
-
-  @override
-  Widget build(BuildContext context) {
-    return MouseRegion(
-      cursor: SystemMouseCursors.click,
-      child: GsGestureDetector(
-        child: GSIcon(icon: icon),
-        onPressed: () {
-          Navigator.of(context)
-              .push(MaterialPageRoute(builder: (context) => landingPage));
         },
       ),
     );

@@ -1,4 +1,5 @@
 class ProductModel {
+  final int id;
   final String? name;
   final String? size;
   final DateTime? deliveryDate;
@@ -11,6 +12,7 @@ class ProductModel {
   final String? meta;
 
   ProductModel({
+    required this.id,
     this.name,
     this.meta,
     this.size,
@@ -23,7 +25,35 @@ class ProductModel {
     this.ratedBy,
   });
 
+  ProductModel copyWith({
+ int? id,
+    String? name,
+    String? size,
+    DateTime? deliveryDate,
+    double? price,
+    String? discount,
+    int? quantity,
+    String? imageUrl,
+    double? rating,
+    int? ratedBy,
+    String? meta,
+  }) =>
+      ProductModel(
+        id: id ?? this.id,
+        name: name ?? this.name,
+        size: size ?? this.size,
+        deliveryDate: deliveryDate ?? this.deliveryDate,
+        price: price ?? this.price,
+        discount: discount ?? this.discount,
+        quantity: quantity ?? this.quantity,
+        imageUrl: imageUrl ?? this.imageUrl,
+        rating: rating ?? this.rating,
+        ratedBy: ratedBy ?? this.ratedBy,
+        meta: meta ?? this.meta,
+      );
+
   factory ProductModel.fromJson(Map<String, dynamic> json) => ProductModel(
+    id: json['id'],
       name: json["name"],
       meta: json['meta'],
       size: json["size"],

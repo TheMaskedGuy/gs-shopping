@@ -3,47 +3,70 @@ import 'package:catalog/widgets/wishlist_card.dart';
 import 'package:flutter/material.dart';
 import 'package:gluestack_ui/gluestack_ui.dart';
 
-class WishListPage extends StatefulWidget {
+class WishListPage extends StatelessWidget {
   const WishListPage({super.key});
 
   @override
-  State<WishListPage> createState() => _WishListPageState();
-}
-
-class _WishListPageState extends State<WishListPage> {
-  @override
   Widget build(BuildContext context) {
-    final sw = MediaQuery.of(context).size.width;
-    print(sw);
-    ;
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: $GSColors.primary400,
         centerTitle: false,
+        automaticallyImplyLeading: false,
         title: GSVStack(
           children: [
-            GSText(text: 'Wishlist'),
-            GSText(text: '${cartState.length} items'),
+            GSText(
+              text: 'Wishlist',
+              style: GSStyle(textStyle: TextStyle(color: $GSColors.white)),
+            ),
+            ListenableBuilder(
+                listenable: wishlistStateNotifier,
+                builder: (context, child) {
+                  return GSText(
+                    text: '${wishlistStateNotifier.wishListLength} items',
+                    style:
+                        GSStyle(textStyle: TextStyle(color: $GSColors.white)),
+                  );
+                }),
           ],
         ),
-      ),
-      body: GridView.builder(
-        padding: const EdgeInsets.all(8),
-        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 2,
-          childAspectRatio: 0.55,
-        ),
-        itemCount: wishListState.length,
-        itemBuilder: (context, index) {
-          return WishListCard(
-            productModel: wishListState[index],
-            removeFunction: () {
-              setState(() {
-                wishListState.remove(wishListState[index]);
-              });
+        leading: GSCenter(
+          child: GsGestureDetector(
+            onPressed: () {
+              Navigator.pop(context);
             },
-          );
-        },
+            child: GSBox(
+                style: GSStyle(padding: EdgeInsets.only(left: 5)),
+                child: GSIcon(
+                  icon: Icons.arrow_back,
+                  style: GSStyle(
+                      color: $GSColors.white, iconColor: $GSColors.white),
+                )),
+          ),
+        ),
+        leadingWidth: 20,
       ),
+      body: ListenableBuilder(
+          listenable: wishlistStateNotifier,
+          builder: (context, child) {
+            return GridView.builder(
+              padding: const EdgeInsets.all(8),
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 2,
+                childAspectRatio: 0.55,
+              ),
+              itemCount: wishlistStateNotifier.wishListLength,
+              itemBuilder: (context, index) {
+                return WishListCard(
+                  productModel: wishlistStateNotifier.wishlistProducts[index],
+                  removeFunction: () {
+                    wishlistStateNotifier.removeFromWishList(
+                        wishlistStateNotifier.wishlistProducts[index]);
+                  },
+                );
+              },
+            );
+          }),
     );
   }
 }

@@ -22,7 +22,7 @@ class MainApp extends StatelessWidget {
       ),
       gluestackTokenConfig: GluestackTokenConfig(
         gsColorsToken: const GSColorsToken(
-          primaryColorsFromBase: Color.fromARGB(255, 76, 29, 149),
+          primaryColorsFromBase: Color.fromARGB(255, 124, 58, 237),
           backgroundLight50:
               Color.fromARGB(55, 76, 29, 149) //for outline button hover
           ,

@@ -10,7 +10,7 @@ const List<Map<String, dynamic>> productsData = [
     "price": 1635.00,
     "discount": "5%",
     "quantity": 0,
-    "imageUrl": "https://picsum.photos/250"
+    "imageUrl": "https://picsum.photos/id/235/200/200"
   },
   {
     "id": 2,
@@ -23,7 +23,7 @@ const List<Map<String, dynamic>> productsData = [
     "price": 2635.00,
     "discount": "5%",
     "quantity": 0,
-    "imageUrl": "https://picsum.photos/250"
+    "imageUrl": "https://picsum.photos/id/231/200/200"
   },
   {
     "id": 3,
@@ -36,7 +36,7 @@ const List<Map<String, dynamic>> productsData = [
     "price": 3535.00,
     "discount": "5%",
     "quantity": 0,
-    "imageUrl": "https://picsum.photos/250"
+    "imageUrl": "https://picsum.photos/id/240/200/200"
   },
   {
     "id": 4,
@@ -49,7 +49,7 @@ const List<Map<String, dynamic>> productsData = [
     "price": 4420.00,
     "discount": "10%",
     "quantity": 1,
-    "imageUrl": "https://picsum.photos/250"
+    "imageUrl": "https://picsum.photos/id/151/200/200"
   },
   {
     "id": 5,
@@ -62,7 +62,7 @@ const List<Map<String, dynamic>> productsData = [
     "price": 1199.00,
     "discount": "3%",
     "quantity": 2,
-    "imageUrl": "https://picsum.photos/250"
+    "imageUrl": "https://picsum.photos/id/131/200/200"
   },
   {
     "id": 6,
@@ -75,7 +75,7 @@ const List<Map<String, dynamic>> productsData = [
     "price": 5599.00,
     "discount": "15%",
     "quantity": 1,
-    "imageUrl": "https://picsum.photos/250"
+    "imageUrl": "https://picsum.photos/id/145/200/200"
   },
   {
     "id": 7,
@@ -88,6 +88,6 @@ const List<Map<String, dynamic>> productsData = [
     "price": 2299.00,
     "discount": "5%",
     "quantity": 0,
-    "imageUrl": "https://picsum.photos/250"
+    "imageUrl": "https://picsum.photos/id/98/200/200"
   }
 ];

@@ -2,7 +2,9 @@ import 'package:catalog/data/products.dart';
 import 'package:catalog/models/product_model.dart';
 import 'package:catalog/screens/cart_page.dart';
 import 'package:catalog/screens/old_cart_page.dart';
+import 'package:catalog/screens/profile_page.dart';
 import 'package:catalog/screens/wishlist_page.dart';
+import 'package:catalog/utils/state.dart';
 import 'package:catalog/widgets/product_card.dart';
 import 'package:flutter/material.dart';
 import 'package:gluestack_ui/gluestack_ui.dart';
@@ -27,8 +29,7 @@ class ProductsLandingPage extends StatelessWidget {
 
     // final sw = MediaQuery.of(context).size.width;
     // print(sw);
-    List<ProductModel> products = List.generate(productsData.length,
-        (index) => ProductModel.fromJson(productsData[index]));
+
     return Scaffold(
       extendBody: true,
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
@@ -42,7 +43,7 @@ class ProductsLandingPage extends StatelessWidget {
         child: GSHStack(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            navButton(icon: Icons.person, landingPage: const CartPage()),
+            navButton(icon: Icons.person, landingPage: const ProfilePage()),
             navButton(
               icon: Icons.favorite,
               landingPage: const WishListPage(),
@@ -63,7 +64,7 @@ class ProductsLandingPage extends StatelessWidget {
         itemCount: productsData.length,
         itemBuilder: (context, index) {
           return ProductCard(
-            productModel: products[index],
+            productModel: productsDB[index],
           );
         },
       ),

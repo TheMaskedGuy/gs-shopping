@@ -6,15 +6,10 @@ import 'package:intl/intl.dart';
 
 class CartProductCard extends StatelessWidget {
   final ProductModel productModel;
-  final VoidCallback? deleteCallback;
-  final VoidCallback? addQty;
-  final VoidCallback? subQty;
+
   const CartProductCard({
     super.key,
     required this.productModel,
-    this.deleteCallback,
-    this.addQty,
-    this.subQty,
   });
 
   @override
@@ -52,6 +47,7 @@ class CartProductCard extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   GSText(
+                    overflow: TextOverflow.ellipsis,
                     text: productModel.name ?? 'N/A',
                     bold: true,
                   ),
@@ -89,7 +85,9 @@ class CartProductCard extends StatelessWidget {
           ),
           // Delete and qty counter----------------------
           GSHStack(
-            space: GSHstackSpaces.$md,
+            space: MediaQuery.of(context).size.width > 400
+                ? GSHstackSpaces.$md
+                : GSHstackSpaces.$sm,
             children: [
               GsGestureDetector(
                 onPressed: () {

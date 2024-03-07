@@ -1,8 +1,25 @@
+import 'package:catalog/data/products.dart';
+import 'package:catalog/data/user.dart';
 import 'package:catalog/models/product_model.dart';
+import 'package:catalog/models/user_model.dart';
+import 'package:catalog/screens/profile_page.dart';
 import 'package:flutter/material.dart';
 
 final cartStateNotifier = CartState();
 final wishlistStateNotifier = WishlistState();
+final orderStateNotifier = OrderState();
+List<ProductModel> productsDB = List.generate(
+    productsData.length, (index) => ProductModel.fromJson(productsData[index]));
+
+ProductModel? getProductFromId(int id) {
+  for (int i = 0; i < productsDB.length; i++) {
+    if (productsDB[i].id == id) {
+      return productsDB[i];
+    }
+    ;
+  }
+  return null;
+}
 
 class WishlistState extends ChangeNotifier {
   final List<ProductModel> _wishListProducts = [];
@@ -26,16 +43,26 @@ class CartState extends ChangeNotifier {
   final List<ProductModel> _cartProducts = [];
 
   List<ProductModel> get cartProducts => _cartProducts.toList();
+
   double get cartPrice => totalPrice();
-  double totalPrice(){
-    double total = 0;
-    for(int i = 0; i < _cartProducts.length ; i++){
-      total = total + (_cartProducts[i].price ?? 0);
-    } 
-    return total;
+  int get cartProductsCount => totalItems();
+
+  int totalItems() {
+    int sum = 0;
+    for (int i = 0; i < _cartProducts.length; i++) {
+      sum = sum + (_cartProducts[i].quantity ?? 0);
+    }
+    return sum;
   }
 
+  double totalPrice() {
+    double total = 0;
+    for (int i = 0; i < _cartProducts.length; i++) {
 
+      total = total + ((_cartProducts[i].price ?? 0) * (_cartProducts[i].quantity ?? 1) );
+    }
+    return total;
+  }
 
   int checkIfPresentViaId(ProductModel product) {
     for (int i = 0; i < _cartProducts.length; i++) {
@@ -63,6 +90,11 @@ class CartState extends ChangeNotifier {
     notifyListeners();
   }
 
+  void clearCart() {
+    _cartProducts.removeWhere((element) => true);
+    notifyListeners();
+  }
+
   void removeFromCart(ProductModel product) {
     int toAdd = checkIfPresentViaId(product);
 
@@ -85,4 +117,30 @@ class CartState extends ChangeNotifier {
 
     notifyListeners();
   }
+}
+
+class OrderState extends ChangeNotifier {
+  final List<OrderModel> _orders =
+      List.generate(user.orders!.length, (index) => user.orders![index]);
+  List<OrderModel> get orders => _orders.toList();
+
+  void addOrder(List<ProductModel> products) {
+    for (int i = 0; i < products.length; i++) {
+      final order = OrderModel(
+        productId: products[i].id,
+        status: 'In-Transit',
+        id: _orders.length + 1,
+      );
+      _orders.add(order);
+    }
+    cartStateNotifier.clearCart();
+    notifyListeners();
+  }
+
+  void removeOrder(OrderModel order) {
+    _orders.remove(order);
+    notifyListeners();
+  }
+
+  int get orderListLength => _orders.length;
 }

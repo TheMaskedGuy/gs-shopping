@@ -96,7 +96,7 @@ class WishListCard extends StatelessWidget {
                   variant: GSButtonVariants.outline,
                   child: const GSButtonText(text: '+ Add to cart'),
                   onPressed: () {
-                    cartStateNotifier.addToCart(productModel);
+                    // cartStateNotifier.addToCart(productModel);
                   }),
             ),
           )

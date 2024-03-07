@@ -21,6 +21,7 @@ class MainApp extends StatelessWidget {
         },
       ),
       gluestackTokenConfig: GluestackTokenConfig(
+        gsFontSizeToken: GSFontSizeToken($sm: 12), //For order ID small text
         gsColorsToken: const GSColorsToken(
           primaryColorsFromBase: Color.fromARGB(255, 124, 58, 237),
           backgroundLight50:

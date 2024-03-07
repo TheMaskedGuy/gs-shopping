@@ -18,7 +18,11 @@ class ProductsLandingPage extends StatelessWidget {
       return MouseRegion(
         cursor: SystemMouseCursors.click,
         child: GsGestureDetector(
-          child: GSIcon(icon: icon),
+          child: Padding(
+            padding:
+                const EdgeInsets.symmetric(horizontal: 16.0, vertical: 16.0),
+            child: GSIcon(icon: icon),
+          ),
           onPressed: () {
             Navigator.of(context)
                 .push(MaterialPageRoute(builder: (context) => landingPage));
@@ -36,8 +40,8 @@ class ProductsLandingPage extends StatelessWidget {
       floatingActionButton: GSBox(
         style: GSStyle(
           margin: const EdgeInsets.symmetric(horizontal: 40, vertical: 10),
-          padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 30),
-          bg: $GSColors.white,
+          padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+          bg: $GSColors.primary0.withBlue(230).withOpacity(0.9),
           borderRadius: 23,
         ),
         child: GSHStack(
@@ -55,18 +59,21 @@ class ProductsLandingPage extends StatelessWidget {
           ],
         ),
       ),
-      body: GridView.builder(
-        padding: const EdgeInsets.all(8),
-        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 2,
-          childAspectRatio: 0.55,
+      body: SafeArea(
+        child: GridView.builder(
+          physics: const BouncingScrollPhysics(),
+          padding: const EdgeInsets.all(8),
+          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: 2,
+            childAspectRatio: 0.55,
+          ),
+          itemCount: productsData.length,
+          itemBuilder: (context, index) {
+            return ProductCard(
+              productModel: productsDB[index],
+            );
+          },
         ),
-        itemCount: productsData.length,
-        itemBuilder: (context, index) {
-          return ProductCard(
-            productModel: productsDB[index],
-          );
-        },
       ),
     );
   }

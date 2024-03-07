@@ -49,6 +49,25 @@ class WishListPage extends StatelessWidget {
       body: ListenableBuilder(
           listenable: wishlistStateNotifier,
           builder: (context, child) {
+            if (wishlistStateNotifier.wishlistProducts.isEmpty) {
+              return GSCenter(
+                style:
+                    GSStyle(height: MediaQuery.of(context).size.height / 1.5),
+                child: const GSVStack(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    GSIcon(
+                      icon: Icons.warning_rounded,
+                      size: GSIconSizes.$xl,
+                    ),
+                    GSText(
+                      text: 'Wishlist is empty\n❤️ items to continue!',
+                      textAlign: TextAlign.center,
+                    ),
+                  ],
+                ),
+              );
+            }
             return GridView.builder(
               padding: const EdgeInsets.all(8),
               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(

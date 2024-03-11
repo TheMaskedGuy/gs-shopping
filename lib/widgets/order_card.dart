@@ -1,5 +1,7 @@
 import 'package:catalog/models/product_model.dart';
 import 'package:catalog/models/user_model.dart';
+import 'package:catalog/screens/cancel_order_page.dart';
+import 'package:catalog/screens/track_order_page.dart';
 import 'package:catalog/utils/state.dart';
 import 'package:flutter/material.dart';
 import 'package:gluestack_ui/gluestack_ui.dart';
@@ -111,6 +113,11 @@ class OrderCard extends StatelessWidget {
                     onPressed: () {
                       //TODO: Implement this
                       print('Going to track page (TODO)');
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) =>
+                                  TrackOrderPage(order: order)));
                     },
                   ),
                   GSButton(
@@ -118,7 +125,12 @@ class OrderCard extends StatelessWidget {
                     variant: GSButtonVariants.outline,
                     child: const GSButtonText(text: 'CANCEL ORDER'),
                     onPressed: () {
-                      cancelOrder(context);
+                      // cancelOrder(context);
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (context) => CancelOrderPage(order: order),
+                        ),
+                      );
                     },
                   ),
                 ],

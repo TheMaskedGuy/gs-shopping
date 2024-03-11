@@ -1,4 +1,3 @@
-import 'package:catalog/screens/old_cart_page.dart';
 import 'package:catalog/screens/products_landing_page.dart';
 import 'package:flutter/material.dart';
 import 'package:gluestack_ui/gluestack_ui.dart';
@@ -21,7 +20,7 @@ class MainApp extends StatelessWidget {
         },
       ),
       gluestackTokenConfig: GluestackTokenConfig(
-        gsFontSizeToken: GSFontSizeToken($sm: 12), //For order ID small text
+        gsFontSizeToken: const GSFontSizeToken($sm: 12), //For order ID small text
         gsColorsToken: const GSColorsToken(
           primaryColorsFromBase: Color.fromARGB(255, 124, 58, 237),
           backgroundLight50:
@@ -31,6 +30,10 @@ class MainApp extends StatelessWidget {
       ),
       child: const GSApp(
         debugShowCheckedModeBanner: false,
+        // darkTheme: GSThemeData(
+        //     scaffoldBackgroundColor: $GSColors.red400,
+        //     activeColor: $GSColors.red400),
+        // themeMode: GSThemeMode.dark,
         //TODO: Get the latest gluestack (with gs app fix), then remove!
         localizationsDelegates: [
           GlobalMaterialLocalizations.delegate,

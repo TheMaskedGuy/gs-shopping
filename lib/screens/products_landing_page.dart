@@ -1,7 +1,5 @@
 import 'package:catalog/data/products.dart';
-import 'package:catalog/models/product_model.dart';
 import 'package:catalog/screens/cart_page.dart';
-import 'package:catalog/screens/old_cart_page.dart';
 import 'package:catalog/screens/profile_page.dart';
 import 'package:catalog/screens/wishlist_page.dart';
 import 'package:catalog/utils/state.dart';

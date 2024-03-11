@@ -1,4 +1,3 @@
-import 'package:catalog/data/products.dart';
 import 'package:catalog/models/product_model.dart';
 import 'package:catalog/utils/state.dart';
 import 'package:catalog/widgets/cart_product_card_widget.dart';
@@ -149,7 +148,7 @@ class CartPage extends StatelessWidget {
                                         GSText(
                                           size: GSSizes.$sm,
                                           text:
-                                              '${formatCurrency.format(cartStateNotifier.cartPrice)}',
+                                              formatCurrency.format(cartStateNotifier.cartPrice),
                                         ),
                                       ],
                                     ),
@@ -171,7 +170,7 @@ class CartPage extends StatelessWidget {
                                       mainAxisAlignment:
                                           MainAxisAlignment.spaceBetween,
                                       children: [
-                                        GSText(
+                                        const GSText(
                                           text: 'Coupon Discount',
                                           size: GSSizes.$sm,
                                         ),
@@ -215,7 +214,7 @@ class CartPage extends StatelessWidget {
                                     ),
                                     GSText(
                                       text:
-                                          '${formatCurrency.format(cartStateNotifier.cartPrice)}',
+                                          formatCurrency.format(cartStateNotifier.cartPrice),
                                     ),
                                   ],
                                 ),
@@ -313,7 +312,7 @@ class CartPage extends StatelessWidget {
 
                                         Navigator.pop(context);
                                         showToast(context,
-                                            child: GSToast(
+                                            child: const GSToast(
                                               action: GSToastActions.attention,
                                               variant: GSToastVariants.solid,
                                               child: GSText(

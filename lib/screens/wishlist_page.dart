@@ -36,7 +36,7 @@ class WishListPage extends StatelessWidget {
               Navigator.pop(context);
             },
             child: GSBox(
-                style: GSStyle(padding: EdgeInsets.only(left: 5)),
+                style: GSStyle(padding: const EdgeInsets.only(left: 5)),
                 child: GSIcon(
                   icon: Icons.arrow_back,
                   style: GSStyle(

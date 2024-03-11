@@ -1,5 +1,4 @@
 import 'package:catalog/models/product_model.dart';
-import 'package:catalog/utils/state.dart';
 import 'package:flutter/material.dart';
 import 'package:gluestack_ui/gluestack_ui.dart';
 import 'package:intl/intl.dart';
@@ -71,7 +70,7 @@ class WishListCard extends StatelessWidget {
           GSHStack(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              GSText(text: '${formatCurrency.format(productModel.price)}'),
+              GSText(text: formatCurrency.format(productModel.price)),
               //TODO: Get icon button fix (GS) and resolve with that in future
               MouseRegion(
                 cursor: SystemMouseCursors.click,

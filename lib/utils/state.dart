@@ -1,5 +1,4 @@
 import 'package:catalog/data/products.dart';
-import 'package:catalog/data/user.dart';
 import 'package:catalog/models/product_model.dart';
 import 'package:catalog/models/user_model.dart';
 import 'package:catalog/screens/profile_page.dart';
@@ -16,7 +15,6 @@ ProductModel? getProductFromId(int id) {
     if (productsDB[i].id == id) {
       return productsDB[i];
     }
-    ;
   }
   return null;
 }

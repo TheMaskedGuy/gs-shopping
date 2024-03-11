@@ -66,7 +66,7 @@ class CartProductCard extends StatelessWidget {
                       GSText(
                         size: GSSizes.$xs,
                         bold: true,
-                        text: '${formatCurrency.format(productModel.price)}',
+                        text: formatCurrency.format(productModel.price),
                       ),
                       GSText(
                         text: ' (${productModel.discount} OFF)',

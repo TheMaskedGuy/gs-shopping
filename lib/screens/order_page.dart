@@ -34,7 +34,7 @@ class OrderPage extends StatelessWidget {
         leadingWidth: 20,
       ),
       body: GSScrollView(
-        padding: EdgeInsets.symmetric(horizontal: 10, vertical: 15),
+        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 15),
         children: [
           ListenableBuilder(
             listenable: orderStateNotifier,

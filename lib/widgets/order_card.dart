@@ -63,7 +63,7 @@ class OrderCard extends StatelessWidget {
                         bold: true,
                       ),
                       GSText(
-                        text: '${prod.meta ?? 'N/A'}',
+                        text: prod.meta ?? 'N/A',
                         style: GSStyle(
                           textStyle: TextStyle(
                             fontWeight: FontWeight.w400,
@@ -87,7 +87,7 @@ class OrderCard extends StatelessWidget {
                           GSText(
                             size: GSSizes.$xs,
                             bold: true,
-                            text: '${formatCurrency.format(prod.price)}',
+                            text: formatCurrency.format(prod.price),
                           ),
                           GSText(
                             text: ' (${prod.discount} OFF)',

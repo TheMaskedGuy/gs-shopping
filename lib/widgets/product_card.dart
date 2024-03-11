@@ -34,7 +34,7 @@ class ProductCard extends StatelessWidget {
                 Expanded(
                   child: GSBox(
                     style: GSStyle(
-                      padding: EdgeInsets.only(bottom: 5),
+                      padding: const EdgeInsets.only(bottom: 5),
                     ),
                     child: GSImage(
                       borderRadius: GSImageRadius.$md,
@@ -84,7 +84,7 @@ class ProductCard extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     GSText(
-                        text: '${formatCurrency.format(productModel.price)}'),
+                        text: formatCurrency.format(productModel.price)),
 
                     //TODO: Get icon button fix (GS) and resolve with that in future
                     MouseRegion(

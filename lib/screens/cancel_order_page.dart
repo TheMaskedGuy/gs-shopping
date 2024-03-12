@@ -329,7 +329,7 @@ class _CancelOrderPageState extends State<CancelOrderPage> {
           ),
           child: GSText(
               text: showError
-                  ? "Please select the product you want to cancel"
+                  ? "Please select the product you want to cancel!"
                   : "Are you sure you want to cancel this order?"),
         ),
         footer: GSAlertDialogFooter(

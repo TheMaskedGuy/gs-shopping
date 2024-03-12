@@ -19,6 +19,7 @@ class WishListCard extends StatelessWidget {
         padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 10),
         borderRadius: 4,
         bg: $GSColors.primary0.withAlpha(70),
+        sm: GSStyle(bg: $GSColors.primary0.withOpacity(0.08)),
       ),
       child: GSVStack(
         crossAxisAlignment: CrossAxisAlignment.stretch,

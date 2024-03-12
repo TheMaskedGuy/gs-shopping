@@ -100,11 +100,13 @@ class CartPage extends StatelessWidget {
                         children: [
                           if (cartStateNotifier.cartProducts.isEmpty)
                             GSBox(
-                              style: GSStyle(
-                                borderRadius: 4,
-                                width: double.infinity,
-                                bg: $GSColors.white,
-                              ),
+                              style: isDesktop
+                                  ? GSStyle(
+                                      borderRadius: 4,
+                                      width: double.infinity,
+                                      bg: $GSColors.white,
+                                    )
+                                  : null,
                               child: GSCenter(
                                 style: GSStyle(
                                     height: MediaQuery.of(context).size.height /

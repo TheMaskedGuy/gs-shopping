@@ -66,7 +66,7 @@ class WishListPage extends StatelessWidget {
                           width: sw / 1.3,
                           margin: const EdgeInsets.only(
                               top: 32, bottom: 32, left: 16, right: 16),
-                              borderRadius: 4,
+                          borderRadius: 4,
                         )
                       : null,
                   child: GSScrollView(
@@ -123,10 +123,12 @@ class WishListPage extends StatelessWidget {
                           style: GSStyle(
                               height: MediaQuery.of(context).size.height / 1.5),
                           child: GSBox(
-                            style: GSStyle(
-                              bg: $GSColors.white,
-                              width: double.infinity,
-                            ),
+                            style: isDesktop
+                                ? GSStyle(
+                                    bg: $GSColors.white,
+                                    width: double.infinity,
+                                  )
+                                : null,
                             child: const GSVStack(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [

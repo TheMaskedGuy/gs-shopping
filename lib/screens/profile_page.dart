@@ -91,7 +91,7 @@ class ProfilePage extends StatelessWidget {
               ? GSStyle(
                   width: sw / 1.3,
                   margin:
-                      EdgeInsets.only(top: 32, bottom: 32, left: 16, right: 16),
+                      const EdgeInsets.only(top: 32, bottom: 32, left: 16, right: 16),
                 )
               : null,
           child: GSScrollView(
@@ -101,7 +101,7 @@ class ProfilePage extends StatelessWidget {
               isDesktop
                   ? GSBox(
                       style: GSStyle(
-                        padding: EdgeInsets.only(bottom: 8),
+                        padding: const EdgeInsets.only(bottom: 8),
                       ),
                       child: GSHStack(
                         space: GSHstackSpaces.$sm,
@@ -113,14 +113,14 @@ class ProfilePage extends StatelessWidget {
                             child: GSBox(
                                 style: GSStyle(
                                     padding: const EdgeInsets.only(left: 5)),
-                                child: GSIcon(
+                                child: const GSIcon(
                                   icon: Icons.arrow_back,
                                 )),
                           ),
                           GSText(
                             text: 'My Profile',
                             style: GSStyle(
-                              textStyle: TextStyle(
+                              textStyle: const TextStyle(
                                 fontWeight: FontWeight.w600,
                               ),
                             ),
@@ -134,7 +134,7 @@ class ProfilePage extends StatelessWidget {
                     bg: $GSColors.white,
                     width: double.infinity,
                     padding:
-                        EdgeInsets.symmetric(vertical: 15, horizontal: 15)),
+                        const EdgeInsets.symmetric(vertical: 15, horizontal: 15)),
                 child: GSVStack(
                   space: GSVstackSpaces.$3xl,
                   crossAxisAlignment: CrossAxisAlignment.center,
@@ -166,7 +166,7 @@ class ProfilePage extends StatelessWidget {
                             ),
                           ],
                         ),
-                        GSText(
+                        const GSText(
                           text: 'gojo@jjk.society' ?? 'N/A',
                           size: GSSizes.$md,
                         ),

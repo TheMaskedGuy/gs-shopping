@@ -1,4 +1,3 @@
-import 'package:catalog/data/user.dart';
 import 'package:catalog/models/product_model.dart';
 import 'package:catalog/utils/state.dart';
 import 'package:catalog/widgets/cart_product_card_widget.dart';
@@ -51,7 +50,7 @@ class CartPage extends StatelessWidget {
             style: isDesktop
                 ? GSStyle(
                     width: sw / 1.3,
-                    margin: EdgeInsets.only(
+                    margin: const EdgeInsets.only(
                         top: 32, bottom: 32, left: 16, right: 16),
                   )
                 : null,
@@ -63,7 +62,7 @@ class CartPage extends StatelessWidget {
                 isDesktop
                     ? GSBox(
                         style: GSStyle(
-                          padding: EdgeInsets.only(bottom: 8),
+                          padding: const EdgeInsets.only(bottom: 8),
                         ),
                         child: GSHStack(
                           space: GSHstackSpaces.$sm,
@@ -75,14 +74,14 @@ class CartPage extends StatelessWidget {
                               child: GSBox(
                                   style: GSStyle(
                                       padding: const EdgeInsets.only(left: 5)),
-                                  child: GSIcon(
+                                  child: const GSIcon(
                                     icon: Icons.arrow_back,
                                   )),
                             ),
                             GSText(
                               text: 'My Cart',
                               style: GSStyle(
-                                textStyle: TextStyle(
+                                textStyle: const TextStyle(
                                   fontWeight: FontWeight.w600,
                                 ),
                               ),

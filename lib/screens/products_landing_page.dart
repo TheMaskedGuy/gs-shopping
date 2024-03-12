@@ -76,7 +76,7 @@ class ProductsLandingPage extends StatelessWidget {
                     borderRadius: 4,
                     width: isDesktop ? sw / 1.3 : null,
                     bg: Colors.white,
-                    margin: EdgeInsets.only(top: 32, bottom: 32),
+                    margin: const EdgeInsets.only(top: 32, bottom: 32),
                   )
                 : null,
             child: GridView.builder(

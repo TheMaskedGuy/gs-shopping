@@ -1,4 +1,3 @@
-import 'package:catalog/data/user.dart';
 import 'package:catalog/utils/state.dart';
 import 'package:catalog/widgets/desktop_top_bar.dart';
 import 'package:catalog/widgets/wishlist_card.dart';
@@ -65,7 +64,7 @@ class WishListPage extends StatelessWidget {
                   style: isDesktop
                       ? GSStyle(
                           width: sw / 1.3,
-                          margin: EdgeInsets.only(
+                          margin: const EdgeInsets.only(
                               top: 32, bottom: 32, left: 16, right: 16),
                               borderRadius: 4,
                         )
@@ -75,7 +74,7 @@ class WishListPage extends StatelessWidget {
                       isDesktop
                           ? GSBox(
                               style: GSStyle(
-                                padding: EdgeInsets.only(bottom: 8),
+                                padding: const EdgeInsets.only(bottom: 8),
                               ),
                               child: GSHStack(
                                 space: GSHstackSpaces.$sm,
@@ -88,7 +87,7 @@ class WishListPage extends StatelessWidget {
                                         style: GSStyle(
                                             padding:
                                                 const EdgeInsets.only(left: 5)),
-                                        child: GSIcon(
+                                        child: const GSIcon(
                                           icon: Icons.arrow_back,
                                         )),
                                   ),
@@ -99,7 +98,7 @@ class WishListPage extends StatelessWidget {
                                       GSText(
                                         text: 'Wishlist',
                                         style: GSStyle(
-                                          textStyle: TextStyle(
+                                          textStyle: const TextStyle(
                                             fontWeight: FontWeight.w600,
                                           ),
                                         ),

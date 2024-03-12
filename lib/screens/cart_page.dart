@@ -93,290 +93,306 @@ class CartPage extends StatelessWidget {
                 ListenableBuilder(
                     listenable: cartStateNotifier,
                     builder: (context, child) {
-                      if (cartStateNotifier.cartProducts.isEmpty) {
-                        return GSCenter(
-                          style: GSStyle(
-                              height: MediaQuery.of(context).size.height / 1.5),
-                          child: const GSVStack(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              GSIcon(
-                                icon: Icons.warning_rounded,
-                                size: GSIconSizes.$xl,
-                              ),
-                              GSText(
-                                text: 'Cart is empty\nAdd items to continue!',
-                                textAlign: TextAlign.center,
-                              ),
-                            ],
-                          ),
-                        );
-                      }
                       return GSVStack(
                         // crossAxisAlignment: CrossAxisAlignment.stretch,
                         mainAxisAlignment: MainAxisAlignment.center,
                         space: GSVstackSpaces.$lg,
                         children: [
-                          //Top card 1st card----------------------------------
-                          GSBox(
-                            style: GSStyle(
-                              padding: const EdgeInsets.symmetric(
-                                  vertical: 10, horizontal: 10),
-                              bg: $GSColors.white,
-                              borderRadius: 6,
-                              width: double.infinity,
-                              // width: coreCardWidth,
-                            ),
-                            child: GSCenter(
-                              child: GSBox(
-                                style: GSStyle(width: mw),
-                                child: GSVStack(
+                          if (cartStateNotifier.cartProducts.isEmpty)
+                            GSBox(
+                              style: GSStyle(
+                                borderRadius: 4,
+                                width: double.infinity,
+                                bg: $GSColors.white,
+                              ),
+                              child: GSCenter(
+                                style: GSStyle(
+                                    height: MediaQuery.of(context).size.height /
+                                        1.5),
+                                child: const GSVStack(
+                                  mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
-                                    for (ProductModel prod
-                                        in cartStateNotifier.cartProducts)
-                                      CartProductCard(
-                                        productModel: prod,
-                                      ),
+                                    GSIcon(
+                                      icon: Icons.warning_rounded,
+                                      size: GSIconSizes.$xl,
+                                    ),
+                                    GSText(
+                                      text:
+                                          'Cart is empty\nAdd items to continue!',
+                                      textAlign: TextAlign.center,
+                                    ),
                                   ],
                                 ),
                               ),
-                            ),
-                          ),
-
-                          //2nd Card--------------------------------
-                          GSBox(
-                            style: GSStyle(
-                              width: double.infinity,
-                              padding: const EdgeInsets.symmetric(
-                                  vertical: 10, horizontal: 10),
-                              bg: $GSColors.white,
-                              borderRadius: 6,
-                              // width: coreCardWidth,
-                            ),
-                            child: GSCenter(
-                              child: SizedBox(
-                                width: mw,
-                                child: GSVStack(
-                                    space: GSVstackSpaces.$xl,
-                                    // crossAxisAlignment: CrossAxisAlignment.stretch,
+                            )
+                          else ...[
+                            //Top card 1st card----------------------------------
+                            GSBox(
+                              style: GSStyle(
+                                padding: const EdgeInsets.symmetric(
+                                    vertical: 10, horizontal: 10),
+                                bg: $GSColors.white,
+                                borderRadius: 6,
+                                width: double.infinity,
+                                // width: coreCardWidth,
+                              ),
+                              child: GSCenter(
+                                child: GSBox(
+                                  style: GSStyle(width: mw),
+                                  child: GSVStack(
                                     children: [
-                                      Align(
-                                        alignment: Alignment.centerLeft,
-                                        child: GSBox(
-                                          style: GSStyle(
-                                            padding:
-                                                const EdgeInsets.only(top: 13),
-                                          ),
-                                          child: GSText(
-                                            text:
-                                                'Order Details (${cartStateNotifier.cartProductsCount} items)',
+                                      for (ProductModel prod
+                                          in cartStateNotifier.cartProducts)
+                                        CartProductCard(
+                                          productModel: prod,
+                                        ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ),
+
+                            //2nd Card--------------------------------
+                            GSBox(
+                              style: GSStyle(
+                                width: double.infinity,
+                                padding: const EdgeInsets.symmetric(
+                                    vertical: 10, horizontal: 10),
+                                bg: $GSColors.white,
+                                borderRadius: 6,
+                                // width: coreCardWidth,
+                              ),
+                              child: GSCenter(
+                                child: SizedBox(
+                                  width: mw,
+                                  child: GSVStack(
+                                      space: GSVstackSpaces.$xl,
+                                      // crossAxisAlignment: CrossAxisAlignment.stretch,
+                                      children: [
+                                        Align(
+                                          alignment: Alignment.centerLeft,
+                                          child: GSBox(
                                             style: GSStyle(
-                                                textStyle: const TextStyle(
-                                              fontWeight: FontWeight.w500,
-                                            )),
+                                              padding: const EdgeInsets.only(
+                                                  top: 13),
+                                            ),
+                                            child: GSText(
+                                              text:
+                                                  'Order Details (${cartStateNotifier.cartProductsCount} items)',
+                                              style: GSStyle(
+                                                  textStyle: const TextStyle(
+                                                fontWeight: FontWeight.w500,
+                                              )),
+                                            ),
                                           ),
                                         ),
-                                      ),
 
-                                      //----------------- Price Breakup -----------------------------
-                                      GSVStack(
-                                        space: GSVstackSpaces.$md,
-                                        children: [
-                                          GSHStack(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceBetween,
-                                            children: [
-                                              const GSText(
-                                                text: 'Total MRP',
-                                                size: GSSizes.$sm,
-                                              ),
-                                              GSText(
-                                                size: GSSizes.$sm,
-                                                text: formatCurrency.format(
-                                                    cartStateNotifier
-                                                        .cartPrice),
-                                              ),
-                                            ],
-                                          ),
-                                          const GSHStack(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceBetween,
-                                            children: [
-                                              GSText(
-                                                text: 'Discount MRP',
-                                                size: GSSizes.$sm,
-                                              ),
-                                              GSText(
-                                                text: '0.00',
-                                                size: GSSizes.$sm,
-                                              ),
-                                            ],
-                                          ),
-                                          GSHStack(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceBetween,
-                                            children: [
-                                              const GSText(
-                                                text: 'Coupon Discount',
-                                                size: GSSizes.$sm,
-                                              ),
-                                              GSText(
-                                                text: 'Apply Coupon',
-                                                size: GSSizes.$sm,
-                                                style: GSStyle(
-                                                    textStyle: TextStyle(
-                                                  color: $GSColors.primary400,
-                                                )),
-                                              ),
-                                            ],
-                                          ),
-                                          const GSHStack(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceBetween,
-                                            children: [
-                                              GSText(
-                                                text: 'Shipping',
-                                                size: GSSizes.$sm,
-                                              ),
-                                              GSText(
-                                                text: 'Free',
-                                                size: GSSizes.$sm,
-                                              ),
-                                            ],
-                                          ),
-                                        ],
-                                      ),
-                                      const GSDivider(),
+                                        //----------------- Price Breakup -----------------------------
+                                        GSVStack(
+                                          space: GSVstackSpaces.$md,
+                                          children: [
+                                            GSHStack(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment
+                                                      .spaceBetween,
+                                              children: [
+                                                const GSText(
+                                                  text: 'Total MRP',
+                                                  size: GSSizes.$sm,
+                                                ),
+                                                GSText(
+                                                  size: GSSizes.$sm,
+                                                  text: formatCurrency.format(
+                                                      cartStateNotifier
+                                                          .cartPrice),
+                                                ),
+                                              ],
+                                            ),
+                                            const GSHStack(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment
+                                                      .spaceBetween,
+                                              children: [
+                                                GSText(
+                                                  text: 'Discount MRP',
+                                                  size: GSSizes.$sm,
+                                                ),
+                                                GSText(
+                                                  text: '0.00',
+                                                  size: GSSizes.$sm,
+                                                ),
+                                              ],
+                                            ),
+                                            GSHStack(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment
+                                                      .spaceBetween,
+                                              children: [
+                                                const GSText(
+                                                  text: 'Coupon Discount',
+                                                  size: GSSizes.$sm,
+                                                ),
+                                                GSText(
+                                                  text: 'Apply Coupon',
+                                                  size: GSSizes.$sm,
+                                                  style: GSStyle(
+                                                      textStyle: TextStyle(
+                                                    color: $GSColors.primary400,
+                                                  )),
+                                                ),
+                                              ],
+                                            ),
+                                            const GSHStack(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment
+                                                      .spaceBetween,
+                                              children: [
+                                                GSText(
+                                                  text: 'Shipping',
+                                                  size: GSSizes.$sm,
+                                                ),
+                                                GSText(
+                                                  text: 'Free',
+                                                  size: GSSizes.$sm,
+                                                ),
+                                              ],
+                                            ),
+                                          ],
+                                        ),
+                                        const GSDivider(),
+                                        GSHStack(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            GSText(
+                                              text: 'Total Amount',
+                                              style: GSStyle(
+                                                  textStyle: const TextStyle(
+                                                fontWeight: FontWeight.w500,
+                                              )),
+                                            ),
+                                            GSText(
+                                              text: formatCurrency.format(
+                                                  cartStateNotifier.cartPrice),
+                                            ),
+                                          ],
+                                        ),
+                                      ]),
+                                ),
+                              ),
+                            ),
+                            //Spacer
+                            // GSBox(
+                            //   style: GSStyle(height: 30),
+                            // ),
+                            //Bottom card 3rd card --------------------------------
+                            GSBox(
+                              style: GSStyle(
+                                padding: const EdgeInsets.symmetric(
+                                    vertical: 10, horizontal: 10),
+                                bg: $GSColors.white,
+                                width: double.infinity,
+                                borderRadius: 6,
+                              ),
+                              child: GSCenter(
+                                child: GSBox(
+                                  style: GSStyle(
+                                    width: mw,
+                                  ),
+                                  child: GSVStack(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    mainAxisSize: MainAxisSize.min,
+                                    space: GSVstackSpaces.$md,
+                                    children: [
+                                      //1st row--------
+
                                       GSHStack(
                                         mainAxisAlignment:
                                             MainAxisAlignment.spaceBetween,
                                         children: [
                                           GSText(
-                                            text: 'Total Amount',
+                                            text: 'Select Delivery Address',
                                             style: GSStyle(
                                                 textStyle: const TextStyle(
                                               fontWeight: FontWeight.w500,
                                             )),
                                           ),
                                           GSText(
-                                            text: formatCurrency.format(
-                                                cartStateNotifier.cartPrice),
+                                            text: 'Change',
+                                            size: GSSizes.$sm,
+                                            style: GSStyle(
+                                              textStyle: TextStyle(
+                                                  color: $GSColors.primary400),
+                                            ),
                                           ),
                                         ],
                                       ),
-                                    ]),
-                              ),
-                            ),
-                          ),
-                          //Spacer
-                          // GSBox(
-                          //   style: GSStyle(height: 30),
-                          // ),
-                          //Bottom card 3rd card --------------------------------
-                          GSBox(
-                            style: GSStyle(
-                              padding: const EdgeInsets.symmetric(
-                                  vertical: 10, horizontal: 10),
-                              bg: $GSColors.white,
-                              width: double.infinity,
-                              borderRadius: 6,
-                            ),
-                            child: GSCenter(
-                              child: GSBox(
-                                style: GSStyle(
-                                  width: mw,
-                                ),
-                                child: GSVStack(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  mainAxisSize: MainAxisSize.min,
-                                  space: GSVstackSpaces.$md,
-                                  children: [
-                                    //1st row--------
-
-                                    GSHStack(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        GSText(
-                                          text: 'Select Delivery Address',
-                                          style: GSStyle(
-                                              textStyle: const TextStyle(
-                                            fontWeight: FontWeight.w500,
-                                          )),
-                                        ),
-                                        GSText(
-                                          text: 'Change',
-                                          size: GSSizes.$sm,
-                                          style: GSStyle(
-                                            textStyle: TextStyle(
-                                                color: $GSColors.primary400),
+                                      //2nd row--------
+                                      GSVStack(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        space: GSVstackSpaces.$xs,
+                                        children: [
+                                          GSText(
+                                            text: 'Megan Smith',
+                                            size: GSSizes.$xs,
+                                            bold: true,
+                                            style: GSStyle(
+                                                textStyle: TextStyle(
+                                              color: $GSColors.textLight700,
+                                            )),
                                           ),
-                                        ),
-                                      ],
-                                    ),
-                                    //2nd row--------
-                                    GSVStack(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      space: GSVstackSpaces.$xs,
-                                      children: [
-                                        GSText(
-                                          text: 'Megan Smith',
-                                          size: GSSizes.$xs,
-                                          bold: true,
-                                          style: GSStyle(
-                                              textStyle: TextStyle(
-                                            color: $GSColors.textLight700,
-                                          )),
-                                        ),
-                                        const GSText(
-                                          text: '606-249664 Copper Field,',
-                                          size: GSSizes.$sm,
-                                        ),
-                                        const GSText(
-                                          text: 'Roseville NH 11532..',
-                                          size: GSSizes.$sm,
-                                        ),
-                                      ],
-                                    ),
-                                    //3rd Row-------
-                                    GSVStack(
-                                      //Even box does not work.
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.stretch,
-                                      children: [
-                                        GSButton(
-                                            child: GSButtonText(
-                                              text: 'PLACE ORDER',
-                                              style: GSStyle(
-                                                  textStyle: const TextStyle(
-                                                fontWeight: FontWeight.w300,
-                                              )),
-                                            ),
-                                            onPressed: () {
-                                              // print('Placing Order!');
-                                              orderStateNotifier.addOrder(
-                                                  cartStateNotifier
-                                                      .cartProducts);
+                                          const GSText(
+                                            text: '606-249664 Copper Field,',
+                                            size: GSSizes.$sm,
+                                          ),
+                                          const GSText(
+                                            text: 'Roseville NH 11532..',
+                                            size: GSSizes.$sm,
+                                          ),
+                                        ],
+                                      ),
+                                      //3rd Row-------
+                                      GSVStack(
+                                        //Even box does not work.
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.stretch,
+                                        children: [
+                                          GSButton(
+                                              child: GSButtonText(
+                                                text: 'PLACE ORDER',
+                                                style: GSStyle(
+                                                    textStyle: const TextStyle(
+                                                  fontWeight: FontWeight.w300,
+                                                )),
+                                              ),
+                                              onPressed: () {
+                                                // print('Placing Order!');
+                                                orderStateNotifier.addOrder(
+                                                    cartStateNotifier
+                                                        .cartProducts);
 
-                                              Navigator.pop(context);
-                                              showToast(context,
-                                                  child: const GSToast(
-                                                    action: GSToastActions
-                                                        .attention,
-                                                    variant:
-                                                        GSToastVariants.solid,
-                                                    child: GSText(
-                                                        text: 'Order Placed ✅'),
-                                                  ));
-                                            }),
-                                      ],
-                                    )
-                                  ],
+                                                Navigator.pop(context);
+                                                showToast(context,
+                                                    child: const GSToast(
+                                                      action: GSToastActions
+                                                          .attention,
+                                                      variant:
+                                                          GSToastVariants.solid,
+                                                      child: GSText(
+                                                          text:
+                                                              'Order Placed ✅'),
+                                                    ));
+                                              }),
+                                        ],
+                                      )
+                                    ],
+                                  ),
                                 ),
                               ),
                             ),
-                          ),
+                          ]
                         ],
                       );
                     }),
